@@ -1,5 +1,8 @@
 function add(...nums) {
-    return nums.reduce((sum, currentNum) => sum+currentNum, 0);
+    return nums.reduce((sum, currentNum) => sum + currentNum, 0);
 }
 
-console.log(add())
+function substract(firstNum, secondNum) {
+    return firstNum - secondNum;
+}
+console.log(substract(6,4));
