@@ -13,4 +13,11 @@ function multiply(...nums) {
     return nums.reduce((product, currentNum) => product * currentNum, 1);
 }
 
-console.log(multiply(6,4,2,2));
+function divide(firstNum, secondNum) {
+    if(secondNum === 0)   return "ERROR";
+    return firstNum / secondNum;
+}
+
+let firstNumber ;
+let operator ;
+let secondNumber ;
