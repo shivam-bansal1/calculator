@@ -45,7 +45,7 @@ let secondNumber ;
 
 let displayValue = 0;
 let resultDisplayContainer = document.querySelector('.result-display');
-resultDisplayContainer.innerHTML = 0;
+resultDisplayContainer.innerHTML = displayValue;
 let buttons = document.querySelectorAll('.number-btn');
 // console.log(buttons);
 
@@ -61,3 +61,10 @@ buttons.forEach((button) => {
         resultDisplayContainer.innerHTML = displayValue;
     })
 });
+
+let clearButton = document.querySelector('#all-clear');
+clearButton.addEventListener('click', () => {
+    displayValue = 0;
+    resultDisplayContainer.innerHTML = displayValue;
+
+})
