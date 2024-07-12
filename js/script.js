@@ -44,11 +44,20 @@ let secondNumber ;
 
 
 let displayValue = 0;
+let resultDisplayContainer = document.querySelector('.result-display');
+resultDisplayContainer.innerHTML = 0;
 let buttons = document.querySelectorAll('.number-btn');
 // console.log(buttons);
 
 buttons.forEach((button) => {
     button.addEventListener('click', ()=> {
-        console.log(button.innerHTML);
+        // console.log(button.innerHTML);
+        if(displayValue === 0) {
+            displayValue = button.innerHTML;
+        }
+        else {
+            displayValue += button.innerHTML;
+        }
+        resultDisplayContainer.innerHTML = displayValue;
     })
 });
