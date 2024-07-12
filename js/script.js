@@ -18,6 +18,26 @@ function divide(firstNum, secondNum) {
     return firstNum / secondNum;
 }
 
+function operate(operator, firstNumber, secondNumber) {
+    let result;
+
+    switch (operator) {
+        case '+' :
+            result = add(firstNumber, secondNumber);
+            break;
+        case '-' :
+            result = substract(firstNumber, secondNumber);
+            break;
+        case '*' :
+            result = multiply(firstNumber, secondNumber);
+            break;
+        case '/' :
+            result = divide(firstNumber, secondNumber);
+            break;
+    }
+
+    return result;
+}
 let firstNumber ;
 let operator ;
 let secondNumber ;
