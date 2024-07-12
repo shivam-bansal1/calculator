@@ -41,3 +41,14 @@ function operate(operator, firstNumber, secondNumber) {
 let firstNumber ;
 let operator ;
 let secondNumber ;
+
+
+let displayValue = 0;
+let buttons = document.querySelectorAll('.number-btn');
+// console.log(buttons);
+
+buttons.forEach((button) => {
+    button.addEventListener('click', ()=> {
+        console.log(button.innerHTML);
+    })
+});
