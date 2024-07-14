@@ -19,6 +19,8 @@ function divide(firstNum, secondNum) {
 }
 
 function operate(operator, firstNumber, secondNumber) {
+    firstNumber = parseInt(firstNumber);
+    secondNumber = parseInt(secondNumber);
     let result;
 
     switch (operator) {
@@ -44,15 +46,17 @@ let secondNumber = null;
 
 
 let displayValue = 0;
+let equationContainer = document.querySelector('.equation-display');
 let resultDisplayContainer = document.querySelector('.result-display');
-resultDisplayContainer.innerHTML = displayValue;
+resultDisplayContainer.textContent = displayValue;
 let buttons = document.querySelectorAll('button');
+
 
 buttons.forEach((button) => {
     button.addEventListener('click', (event)=> {
         let buttonClass = event.target.className;
-        console.log(buttonClass);
-        
+        let buttonId = event.target.id;
+
         // Assign numbers and operators to variables
         if (buttonClass === 'number-btn') {
             if(operator === null){
@@ -69,27 +73,52 @@ buttons.forEach((button) => {
                 else 
                     secondNumber += button.textContent;
             }
-            console.log(`firstNumber :${firstNumber}`);
-            console.log(`secondNumber :${secondNumber}`);
         }
-        else if(buttonClass === 'operator-btn') {
+        else if(buttonClass === 'operator-btn' && buttonId !== "equal") {
             operator = button.textContent;
         }
 
         // Display equation on the display panel
         if(displayValue === 0) {
-            displayValue = button.innerHTML;
+            displayValue = button.textContent;
         }
         else {
-            displayValue += button.innerHTML;
+            displayValue += button.textContent;
         }
-        resultDisplayContainer.innerHTML = displayValue;
+
+        if (resultDisplayContainer.textContent == 0)
+            resultDisplayContainer.textContent = displayValue;
+        
+        equationContainer.textContent = displayValue;
+
+        // Solve equation
+        if (buttonId === "equal" || (operator != null && secondNumber != null && buttonClass === 'operator-btn')) {
+            let equationResult = operate(operator, firstNumber, secondNumber);
+            firstNumber = equationResult;
+            secondNumber = null;
+            resultDisplayContainer.textContent = equationResult;
+
+            if(buttonId === "equal") {
+                operator = null;
+                equationContainer.textContent = displayValue;
+                displayValue = equationResult;
+            }
+            else {
+                equationContainer.textContent = displayValue;
+                operator = displayValue.slice(-1);
+                displayValue = equationResult + operator;
+            }
+        }
     })
 });
 
 let clearButton = document.querySelector('#all-clear');
 clearButton.addEventListener('click', () => {
     displayValue = 0;
-    resultDisplayContainer.innerHTML = displayValue;
+    resultDisplayContainer.textContent = displayValue;
+    equationContainer.textContent = '';
 
+    firstNumber = 0;
+    secondNumber = null;
+    operator = null;
 })
