@@ -73,6 +73,7 @@ buttons.forEach((button) => {
                 else 
                     secondNumber += button.textContent;
             }
+            resultDisplayContainer.textContent = firstNumber;
         }
         else if(buttonClass === 'operator-btn' && buttonId !== "equal") {
             operator = button.textContent;
@@ -85,10 +86,8 @@ buttons.forEach((button) => {
         else {
             displayValue += button.textContent;
         }
-
-        if (resultDisplayContainer.textContent == 0)
-            resultDisplayContainer.textContent = displayValue;
         
+        console.log(firstNumber);
         equationContainer.textContent = displayValue;
 
         // Solve equation
