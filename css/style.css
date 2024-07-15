@@ -25,7 +25,6 @@ button {
 }
 
 .display {
-    /* margin: 20px 10px; */
     height: 80px;
     width: 250px;
 
@@ -35,10 +34,18 @@ button {
 
 .equation-display ,
 .result-display {
-    color: darksalmon;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
     text-align: end;
     height: 40px;
     padding-right: 5px;
+    font-size: 32px;
+}
+
+.equation-display {
+    color: darksalmon;
+    font-weight: lighter;
+    font-size: 20px;
 }
 
 .calci-buttons {
@@ -66,4 +73,16 @@ button {
 
 .undo-icon {
     font-size: 15px;
+}
+
+.number-btn:hover {
+    background-color: rgb(190, 190, 190);
+}
+
+.operator-btn:hover {
+    background-color: rgb(229, 186, 171);
+}
+
+#equal:hover {
+    background-color: limegreen;
 }
