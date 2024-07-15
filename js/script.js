@@ -18,6 +18,12 @@ function divide(firstNum, secondNum) {
     return firstNum / secondNum;
 }
 
+function percentage(firstNum, secondNum) {
+    if(firstNum ===0 || secondNum === 0)   return 0;
+    return Math.round((firstNum * (secondNum/100)) *100)/100;
+}
+
+
 function operate(operator, firstNumber, secondNumber) {
     firstNumber = parseInt(firstNumber);
     secondNumber = parseInt(secondNumber);
@@ -35,6 +41,9 @@ function operate(operator, firstNumber, secondNumber) {
             break;
         case '/' :
             result = divide(firstNumber, secondNumber);
+            break;
+        case '%' :
+            result = percentage(firstNumber, secondNumber);
             break;
     }
 
@@ -86,8 +95,6 @@ buttons.forEach((button) => {
         else {
             displayValue += button.textContent;
         }
-        
-        console.log(firstNumber);
         equationContainer.textContent = displayValue;
 
         // Solve equation

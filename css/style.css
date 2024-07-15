@@ -63,3 +63,7 @@ button {
     border: none;
     border-radius: 30px;
 }
+
+.undo-icon {
+    font-size: 15px;
+}
