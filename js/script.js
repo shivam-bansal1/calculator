@@ -37,6 +37,7 @@ function operate(operator, firstNumber, secondNumber) {
             result = substract(firstNumber, secondNumber);
             break;
         case '*' :
+        case 'x' :
             result = multiply(firstNumber, secondNumber);
             break;
         case '/' :
