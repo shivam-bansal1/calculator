@@ -11,6 +11,13 @@ resultContainer.textContent = resultDisplayContent;
 let numberButtons = document.querySelectorAll('.number-btn');
 let operationButtons = document.querySelectorAll('.operator-btn');
 
+function allClear() {
+    equationDisplayContent = "";
+    resultDisplayContent = "";
+    operator = null;
+    equationContainer.textContent = ""
+    resultContainer.textContent = "";
+}
 
 numberButtons.forEach((button)=> {
     button.addEventListener('click', (event) => {
@@ -34,6 +41,9 @@ operationButtons.forEach((button)=> {
             resultContainer.textContent = resultDisplayContent;
             resultDisplayContent = "";
             operator = null;
+        }
+        else if(buttonId === 'all-clear') {
+            allClear();
         }
         else {
             if(operator) {
