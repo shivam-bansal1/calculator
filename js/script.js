@@ -1,131 +1,56 @@
-function add(...nums) {
-    if(nums.length === 0)   return "No Input";
-    return nums.reduce((sum, currentNum) => sum + currentNum, 0);
-}
+import {add, substract, multiply, divide, percentage, operate} from "./util.js" 
 
-function substract(...nums) {
-    if(nums.length === 0)   return "No Input";
-    return nums.reduce((firstNum, secondNum) => firstNum - secondNum);
-}
-
-function multiply(...nums) {
-    if(nums.length === 0)   return "No Input";
-    return nums.reduce((product, currentNum) => product * currentNum, 1);
-}
-
-function divide(firstNum, secondNum) {
-    if(secondNum === 0)   return "ERROR";
-    return firstNum / secondNum;
-}
-
-function percentage(firstNum, secondNum) {
-    if(firstNum ===0 || secondNum === 0)   return 0;
-    return Math.round((firstNum * (secondNum/100)) *100)/100;
-}
-
-
-function operate(operator, firstNumber, secondNumber) {
-    firstNumber = parseInt(firstNumber);
-    secondNumber = parseInt(secondNumber);
-    let result;
-
-    switch (operator) {
-        case '+' :
-            result = add(firstNumber, secondNumber);
-            break;
-        case '-' :
-            result = substract(firstNumber, secondNumber);
-            break;
-        case '*' :
-        case 'x' :
-            result = multiply(firstNumber, secondNumber);
-            break;
-        case '/' :
-            result = divide(firstNumber, secondNumber);
-            break;
-        case '%' :
-            result = percentage(firstNumber, secondNumber);
-            break;
-    }
-
-    return result;
-}
-let firstNumber = 0;
+let equationDisplayContent = null;
+let resultDisplayContent = "";
 let operator = null;
-let secondNumber = null;
 
-
-let displayValue = 0;
+let resultContainer = document.querySelector('.result-display');
 let equationContainer = document.querySelector('.equation-display');
-let resultDisplayContainer = document.querySelector('.result-display');
-resultDisplayContainer.textContent = displayValue;
-let buttons = document.querySelectorAll('button');
+resultContainer.textContent = resultDisplayContent;
+
+let numberButtons = document.querySelectorAll('.number-btn');
+let operationButtons = document.querySelectorAll('.operator-btn');
 
 
-buttons.forEach((button) => {
-    button.addEventListener('click', (event)=> {
-        let buttonClass = event.target.className;
-        let buttonId = event.target.id;
-
-        // Assign numbers and operators to variables
-        if (buttonClass === 'number-btn') {
-            if(operator === null){
-                if(firstNumber === 0){
-                    firstNumber = button.textContent;
-                }
-                else {
-                    firstNumber += button.textContent;
-                }
-            }
-            else {
-                if(secondNumber === null)
-                    secondNumber = button.textContent;
-                else 
-                    secondNumber += button.textContent;
-            }
-            resultDisplayContainer.textContent = firstNumber;
-        }
-        else if(buttonClass === 'operator-btn' && buttonId !== "equal") {
-            operator = button.textContent;
-        }
-
-        // Display equation on the display panel
-        if(displayValue === 0) {
-            displayValue = button.textContent;
-        }
-        else {
-            displayValue += button.textContent;
-        }
-        equationContainer.textContent = displayValue;
-
-        // Solve equation
-        if (buttonId === "equal" || (operator != null && secondNumber != null && buttonClass === 'operator-btn')) {
-            let equationResult = operate(operator, firstNumber, secondNumber);
-            firstNumber = equationResult;
-            secondNumber = null;
-            resultDisplayContainer.textContent = equationResult;
-
-            if(buttonId === "equal") {
-                operator = null;
-                equationContainer.textContent = displayValue;
-                displayValue = equationResult;
-            }
-            else {
-                equationContainer.textContent = displayValue;
-                operator = displayValue.slice(-1);
-                displayValue = equationResult + operator;
-            }
-        }
-    })
+numberButtons.forEach((button)=> {
+    button.addEventListener('click', (event) => {
+        resultDisplayContent += button.textContent;
+        resultContainer.textContent = resultDisplayContent;
+    });
 });
 
-let clearButton = document.querySelector('#all-clear');
-clearButton.addEventListener('click', () => {
-    displayValue = 0;
-    resultDisplayContainer.textContent = displayValue;
-    equationContainer.textContent = '';
+operationButtons.forEach((button)=> {
+    button.addEventListener('click', (event) => {
+        let buttonId = event.target.id;
+        
+        if (buttonId === 'equal'){
+            equationDisplayContent += operator + resultDisplayContent;
+            equationContainer.textContent = equationDisplayContent + "=";
+            
+            const firstNumber = equationDisplayContent.split(operator)[0];
+            const secondNumber = equationDisplayContent.split(operator)[1];
 
-    firstNumber = 0;
-    secondNumber = null;
-    operator = null;
-})
+            resultDisplayContent = operate(operator, firstNumber, secondNumber);
+            resultContainer.textContent = resultDisplayContent;
+            resultDisplayContent = "";
+            operator = null;
+        }
+        else {
+            if(operator) {
+                const firstNumber = equationDisplayContent;
+                const secondNumber = resultDisplayContent;
+                
+                resultDisplayContent = operate(operator, firstNumber, secondNumber);
+                resultContainer.textContent = resultDisplayContent;
+                equationDisplayContent = resultDisplayContent;
+                equationContainer.textContent = equationDisplayContent + operator;
+            }
+            else {
+                equationDisplayContent = resultDisplayContent;
+                equationContainer.textContent = equationDisplayContent + button.textContent;
+            }
+            resultDisplayContent = "";
+            operator = button.textContent;
+        }
+    });
+});
