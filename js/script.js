@@ -47,7 +47,6 @@ operationButtons.forEach((button)=> {
 
             resultDisplayContent = operate(operator, firstNumber, secondNumber);
             resultContainer.textContent = resultDisplayContent;
-            resultDisplayContent = "";
             operator = null;
         }
         else if(buttonId === 'all-clear') {
