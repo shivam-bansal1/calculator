@@ -25,8 +25,8 @@ export function percentage(firstNum, secondNum) {
 
 
 export function operate(operator, firstNumber, secondNumber) {
-    firstNumber = parseInt(firstNumber);
-    secondNumber = parseInt(secondNumber);
+    firstNumber = parseFloat(firstNumber);
+    secondNumber = parseFloat(secondNumber);
     let result;
 
     switch (operator) {

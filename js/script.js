@@ -21,7 +21,15 @@ function allClear() {
 
 numberButtons.forEach((button)=> {
     button.addEventListener('click', (event) => {
-        resultDisplayContent += button.textContent;
+        let buttonId = event.target.id;
+        if (buttonId === 'decimal') {
+            if(resultDisplayContent.split(".").length <= 1) {
+                resultDisplayContent += button.textContent;
+            }
+        }
+        else {
+            resultDisplayContent += button.textContent;
+        }
         resultContainer.textContent = resultDisplayContent;
     });
 });
