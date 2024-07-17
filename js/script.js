@@ -45,6 +45,10 @@ operationButtons.forEach((button)=> {
         else if(buttonId === 'all-clear') {
             allClear();
         }
+        else if(buttonId === 'undo' || buttonId === 'undo-icon') {
+            resultDisplayContent = resultDisplayContent.slice(0, -1);
+            resultContainer.textContent = resultDisplayContent;
+        }
         else {
             if(operator) {
                 const firstNumber = equationDisplayContent;
